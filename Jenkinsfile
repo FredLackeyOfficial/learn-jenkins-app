@@ -37,11 +37,11 @@ pipeline {
             }
         }
         
-        stage('Post') {
-            always {
-                junit 'test-results/junit.xml'
-            }
-        }
+    }
 
+    post {
+        always {
+            junit 'test-results/junit.xml'
+        }
     }
 }
