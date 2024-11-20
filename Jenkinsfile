@@ -3,11 +3,22 @@ pipeline {
 
     stages {
 
-        stage('Hello Git') {
-            steps {
-                script {
-                    echo 'Hello Git'
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
                 }
+            }
+            steps {
+                sh '''
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
+                '''
             }
         }
         
